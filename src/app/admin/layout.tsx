@@ -32,6 +32,7 @@ import { Spinner } from '@/components/ui/spinner'
 import { useProgress, useRouter } from '@bprogress/next'
 import { BiLogOut, BiNews, BiPieChart } from 'react-icons/bi'
 import { usePathname } from 'next/navigation'
+import adminListMenu from '@/constants/admin-menu'
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     const today = new Date().toLocaleDateString('id-ID', {
@@ -41,32 +42,9 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
         year: 'numeric'
     })
 
-    const listMenu = [
-        {
-            name: 'Utama',
-            menus: [
-                {
-                    name: 'Dashboard',
-                    icon: BiPieChart,
-                    url: '/admin/utama/dashboard'
-                }
-            ]
-        },
-        {
-            name: 'Publikasi',
-            menus: [
-                {
-                    name: 'Berita',
-                    icon: BiNews,
-                    url: '/admin/publikasi/berita'
-                }
-            ]
-        }
-    ]
-
     const pathname = usePathname()
     console.log(pathname)
-    const activeSubmenu = listMenu.find(group => group.menus.some(menu => menu.url === pathname))?.menus.find(menu => menu.url === pathname)?.name || ''
+    const activeSubmenu = adminListMenu.find(group => group.menus.some(menu => menu.url === pathname))?.menus.find(menu => menu.url === pathname)?.name || ''
 
     const [logoutState, logoutFormAction, logoutPending] = useActionState(logoutAction, null)
 
@@ -90,20 +68,20 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
             <SidebarProvider>
                 <Sidebar>
                     <SidebarHeader className='border-b p-4'>
-                        <div className='flex items-center gap-2'>
-                            <div className='bg-primary text-primary-foreground grid size-8 place-items-center rounded-md'>
-                                <ShieldCheckIcon className='size-4' />
+                        <div className='flex items-center gap-3'>
+                            <div className='bg-linear-to-br from-primary to-purple-500 text-primary-foreground grid size-8 place-items-center rounded-md'>
+                                <span>A</span>
                             </div>
                             <div>
                                 <p className='text-sm font-semibold'>Admin BPMP</p>
-                                <p className='text-muted-foreground text-xs'>Control Center</p>
+                                <p className='text-muted-foreground text-xs'>Panel Admin</p>
                             </div>
                         </div>
                     </SidebarHeader>
 
                     <SidebarContent className='p-2'>
                         {
-                            listMenu.map((group) => (
+                            adminListMenu.map((group) => (
                                 <SidebarGroup key={group.name}>
                                     <SidebarGroupLabel>{group.name}</SidebarGroupLabel>
                                     <SidebarGroupContent>
@@ -136,7 +114,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                         </form>
                     </SidebarFooter>
                 </Sidebar>
-                <div className='flex flex-1 flex-col'>
+                <div className='flex flex-1 flex-col w-full'>
                     <header className='bg-card sticky top-0 z-50 border-b'>
                         <div className='mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-2 sm:px-6'>
                             <div className='flex items-center gap-4'>
@@ -152,7 +130,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                             </div>
                         </div>
                     </header>
-                    <main className='mx-auto size-full max-w-7xl flex-1 px-4 py-6 sm:px-6'>
+                    <main className='mx-auto size-full max-w-7xl flex-1 px-4 py-6 sm:px-6 w-full'>
                         {children}
                     </main>
                     <footer className='bg-card h-12 border-t'>

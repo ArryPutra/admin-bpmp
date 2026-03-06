@@ -387,7 +387,8 @@ export const ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  DataStatistik: 'DataStatistik'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -403,7 +404,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification"
+    modelProps: "user" | "session" | "account" | "verification" | "dataStatistik"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -703,6 +704,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DataStatistik: {
+      payload: Prisma.$DataStatistikPayload<ExtArgs>
+      fields: Prisma.DataStatistikFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DataStatistikFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DataStatistikPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DataStatistikFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DataStatistikPayload>
+        }
+        findFirst: {
+          args: Prisma.DataStatistikFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DataStatistikPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DataStatistikFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DataStatistikPayload>
+        }
+        findMany: {
+          args: Prisma.DataStatistikFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DataStatistikPayload>[]
+        }
+        create: {
+          args: Prisma.DataStatistikCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DataStatistikPayload>
+        }
+        createMany: {
+          args: Prisma.DataStatistikCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DataStatistikCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DataStatistikPayload>[]
+        }
+        delete: {
+          args: Prisma.DataStatistikDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DataStatistikPayload>
+        }
+        update: {
+          args: Prisma.DataStatistikUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DataStatistikPayload>
+        }
+        deleteMany: {
+          args: Prisma.DataStatistikDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DataStatistikUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DataStatistikUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DataStatistikPayload>[]
+        }
+        upsert: {
+          args: Prisma.DataStatistikUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DataStatistikPayload>
+        }
+        aggregate: {
+          args: Prisma.DataStatistikAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDataStatistik>
+        }
+        groupBy: {
+          args: Prisma.DataStatistikGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DataStatistikGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DataStatistikCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DataStatistikCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -800,6 +875,17 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+export const DataStatistikScalarFieldEnum = {
+  id: 'id',
+  label: 'label',
+  value: 'value',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DataStatistikScalarFieldEnum = (typeof DataStatistikScalarFieldEnum)[keyof typeof DataStatistikScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -876,6 +962,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**
@@ -977,6 +1077,7 @@ export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit
+  dataStatistik?: Prisma.DataStatistikOmit
 }
 
 /* Types for Logging */

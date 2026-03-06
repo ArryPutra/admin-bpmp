@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth"
 import prisma from "@/lib/prisma"
+import { seedDataStatistik } from "./seeds/data-statistik"
 
 async function main() {
     await auth.api.signUpEmail({
@@ -9,6 +10,8 @@ async function main() {
             password: "password123"
         }
     })
+
+    await seedDataStatistik()
 }
 
 main()

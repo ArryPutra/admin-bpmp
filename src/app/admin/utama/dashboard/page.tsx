@@ -58,12 +58,12 @@ export default function DashboardPage() {
         })}
       </div>
 
-      <Card className='mt-8'>
+      <Card className='mt-8 w-full'>
         <CardHeader>
           <CardTitle>Konten Publikasi</CardTitle>
         </CardHeader>
         <CardContent>
-          <Table className='min-w-190'>
+          <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>Modul</TableHead>
