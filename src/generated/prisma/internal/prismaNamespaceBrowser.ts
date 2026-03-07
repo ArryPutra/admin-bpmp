@@ -134,6 +134,7 @@ export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[k
 
 export const DataStatistikScalarFieldEnum = {
   id: 'id',
+  key: 'key',
   label: 'label',
   value: 'value',
   createdAt: 'createdAt',

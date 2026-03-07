@@ -7,7 +7,7 @@ export async function proxy(request: NextRequest) {
     });
 
     const pathname = request.nextUrl.pathname;
-    const isAdminRoute = pathname.startsWith("/admin/utama/dashboard");
+    const isAdminRoute = pathname.startsWith("/admin");
     const isLoginRoute = pathname === "/login";
 
     if (!session && isAdminRoute) {

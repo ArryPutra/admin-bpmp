@@ -1,4 +1,4 @@
-import { BiNews, BiPieChart, BiSolidGraduation } from "react-icons/bi";
+import { BiData, BiNews, BiPieChart } from "react-icons/bi";
 
 export const adminListMenu = [
     {
@@ -22,12 +22,12 @@ export const adminListMenu = [
         ]
     },
     {
-        name: 'Data Statistik',
+        name: 'Pengaturan',
         menus: [
             {
-                name: 'Sekolah',
-                icon: BiSolidGraduation,
-                url: '/admin/statistik/sekolah'
+                name: 'Data Statistik',
+                icon: BiData,
+                url: '/admin/data-statistik'
             }
         ]
     }

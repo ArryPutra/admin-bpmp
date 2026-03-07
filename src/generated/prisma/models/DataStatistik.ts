@@ -36,6 +36,7 @@ export type DataStatistikSumAggregateOutputType = {
 
 export type DataStatistikMinAggregateOutputType = {
   id: number | null
+  key: string | null
   label: string | null
   value: string | null
   createdAt: Date | null
@@ -44,6 +45,7 @@ export type DataStatistikMinAggregateOutputType = {
 
 export type DataStatistikMaxAggregateOutputType = {
   id: number | null
+  key: string | null
   label: string | null
   value: string | null
   createdAt: Date | null
@@ -52,6 +54,7 @@ export type DataStatistikMaxAggregateOutputType = {
 
 export type DataStatistikCountAggregateOutputType = {
   id: number
+  key: number
   label: number
   value: number
   createdAt: number
@@ -70,6 +73,7 @@ export type DataStatistikSumAggregateInputType = {
 
 export type DataStatistikMinAggregateInputType = {
   id?: true
+  key?: true
   label?: true
   value?: true
   createdAt?: true
@@ -78,6 +82,7 @@ export type DataStatistikMinAggregateInputType = {
 
 export type DataStatistikMaxAggregateInputType = {
   id?: true
+  key?: true
   label?: true
   value?: true
   createdAt?: true
@@ -86,6 +91,7 @@ export type DataStatistikMaxAggregateInputType = {
 
 export type DataStatistikCountAggregateInputType = {
   id?: true
+  key?: true
   label?: true
   value?: true
   createdAt?: true
@@ -181,6 +187,7 @@ export type DataStatistikGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 
 export type DataStatistikGroupByOutputType = {
   id: number
+  key: string
   label: string
   value: string
   createdAt: Date
@@ -212,6 +219,7 @@ export type DataStatistikWhereInput = {
   OR?: Prisma.DataStatistikWhereInput[]
   NOT?: Prisma.DataStatistikWhereInput | Prisma.DataStatistikWhereInput[]
   id?: Prisma.IntFilter<"DataStatistik"> | number
+  key?: Prisma.StringFilter<"DataStatistik"> | string
   label?: Prisma.StringFilter<"DataStatistik"> | string
   value?: Prisma.StringFilter<"DataStatistik"> | string
   createdAt?: Prisma.DateTimeFilter<"DataStatistik"> | Date | string
@@ -220,6 +228,7 @@ export type DataStatistikWhereInput = {
 
 export type DataStatistikOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  key?: Prisma.SortOrder
   label?: Prisma.SortOrder
   value?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -228,6 +237,7 @@ export type DataStatistikOrderByWithRelationInput = {
 
 export type DataStatistikWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  key?: string
   AND?: Prisma.DataStatistikWhereInput | Prisma.DataStatistikWhereInput[]
   OR?: Prisma.DataStatistikWhereInput[]
   NOT?: Prisma.DataStatistikWhereInput | Prisma.DataStatistikWhereInput[]
@@ -235,10 +245,11 @@ export type DataStatistikWhereUniqueInput = Prisma.AtLeast<{
   value?: Prisma.StringFilter<"DataStatistik"> | string
   createdAt?: Prisma.DateTimeFilter<"DataStatistik"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"DataStatistik"> | Date | string
-}, "id">
+}, "id" | "key">
 
 export type DataStatistikOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  key?: Prisma.SortOrder
   label?: Prisma.SortOrder
   value?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -255,6 +266,7 @@ export type DataStatistikScalarWhereWithAggregatesInput = {
   OR?: Prisma.DataStatistikScalarWhereWithAggregatesInput[]
   NOT?: Prisma.DataStatistikScalarWhereWithAggregatesInput | Prisma.DataStatistikScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"DataStatistik"> | number
+  key?: Prisma.StringWithAggregatesFilter<"DataStatistik"> | string
   label?: Prisma.StringWithAggregatesFilter<"DataStatistik"> | string
   value?: Prisma.StringWithAggregatesFilter<"DataStatistik"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"DataStatistik"> | Date | string
@@ -262,6 +274,7 @@ export type DataStatistikScalarWhereWithAggregatesInput = {
 }
 
 export type DataStatistikCreateInput = {
+  key: string
   label: string
   value: string
   createdAt?: Date | string
@@ -270,6 +283,7 @@ export type DataStatistikCreateInput = {
 
 export type DataStatistikUncheckedCreateInput = {
   id?: number
+  key: string
   label: string
   value: string
   createdAt?: Date | string
@@ -277,6 +291,7 @@ export type DataStatistikUncheckedCreateInput = {
 }
 
 export type DataStatistikUpdateInput = {
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   value?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -285,6 +300,7 @@ export type DataStatistikUpdateInput = {
 
 export type DataStatistikUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   value?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -293,6 +309,7 @@ export type DataStatistikUncheckedUpdateInput = {
 
 export type DataStatistikCreateManyInput = {
   id?: number
+  key: string
   label: string
   value: string
   createdAt?: Date | string
@@ -300,6 +317,7 @@ export type DataStatistikCreateManyInput = {
 }
 
 export type DataStatistikUpdateManyMutationInput = {
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   value?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -308,6 +326,7 @@ export type DataStatistikUpdateManyMutationInput = {
 
 export type DataStatistikUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   value?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -316,6 +335,7 @@ export type DataStatistikUncheckedUpdateManyInput = {
 
 export type DataStatistikCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  key?: Prisma.SortOrder
   label?: Prisma.SortOrder
   value?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -328,6 +348,7 @@ export type DataStatistikAvgOrderByAggregateInput = {
 
 export type DataStatistikMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  key?: Prisma.SortOrder
   label?: Prisma.SortOrder
   value?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -336,6 +357,7 @@ export type DataStatistikMaxOrderByAggregateInput = {
 
 export type DataStatistikMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  key?: Prisma.SortOrder
   label?: Prisma.SortOrder
   value?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -358,6 +380,7 @@ export type IntFieldUpdateOperationsInput = {
 
 export type DataStatistikSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  key?: boolean
   label?: boolean
   value?: boolean
   createdAt?: boolean
@@ -366,6 +389,7 @@ export type DataStatistikSelect<ExtArgs extends runtime.Types.Extensions.Interna
 
 export type DataStatistikSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  key?: boolean
   label?: boolean
   value?: boolean
   createdAt?: boolean
@@ -374,6 +398,7 @@ export type DataStatistikSelectCreateManyAndReturn<ExtArgs extends runtime.Types
 
 export type DataStatistikSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  key?: boolean
   label?: boolean
   value?: boolean
   createdAt?: boolean
@@ -382,19 +407,21 @@ export type DataStatistikSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
 
 export type DataStatistikSelectScalar = {
   id?: boolean
+  key?: boolean
   label?: boolean
   value?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DataStatistikOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "label" | "value" | "createdAt" | "updatedAt", ExtArgs["result"]["dataStatistik"]>
+export type DataStatistikOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "label" | "value" | "createdAt" | "updatedAt", ExtArgs["result"]["dataStatistik"]>
 
 export type $DataStatistikPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "DataStatistik"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    key: string
     label: string
     value: string
     createdAt: Date
@@ -823,6 +850,7 @@ export interface Prisma__DataStatistikClient<T, Null = never, ExtArgs extends ru
  */
 export interface DataStatistikFieldRefs {
   readonly id: Prisma.FieldRef<"DataStatistik", 'Int'>
+  readonly key: Prisma.FieldRef<"DataStatistik", 'String'>
   readonly label: Prisma.FieldRef<"DataStatistik", 'String'>
   readonly value: Prisma.FieldRef<"DataStatistik", 'String'>
   readonly createdAt: Prisma.FieldRef<"DataStatistik", 'DateTime'>
