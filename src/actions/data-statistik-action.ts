@@ -32,14 +32,15 @@ export async function createDataStatistikAction(
     prevState: ActionState | null,
     formData: FormData,
 ) {
+    const values = Object.fromEntries(formData.entries())
     const validatedFields =
-        CreateDataStatistikSchema.safeParse(Object.fromEntries(formData.entries()))
+        CreateDataStatistikSchema.safeParse(values)
 
     if (!validatedFields.success) {
         return {
             success: false,
             errors: validatedFields.error.flatten().fieldErrors,
-            values: validatedFields.data,
+            values: values,
         }
     }
 
@@ -73,14 +74,15 @@ export async function updateDataStatistikAction(
     prevSatate: ActionState | null,
     formData: FormData,
 ) {
+    const values = Object.fromEntries(formData.entries())
     const validatedFields =
-        UpdateDataStatistikSchema.safeParse(Object.fromEntries(formData.entries()))
+        UpdateDataStatistikSchema.safeParse(values)
 
     if (!validatedFields.success) {
         return {
             success: false,
             errors: validatedFields.error.flatten().fieldErrors,
-            values: validatedFields.data,
+            values: values
         }
     }
 
@@ -97,14 +99,10 @@ export async function updateDataStatistikAction(
 
         return {
             success: false,
-            message: "Terjadi kesalahan saat mengupdate data statistik."
+            message: "Terjadi kesalahan saat mengupdate data statistik.",
+            values: values
         }
     }
 
     redirect("/admin/data-statistik")
-
-    return {
-        success: true,
-        message: "Data statistik berhasil diupdate."
-    }
 }

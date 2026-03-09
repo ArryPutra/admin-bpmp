@@ -44,7 +44,7 @@ export async function loginAction(
         }
     }
 
-    return redirect("/admin/utama/dashboard")
+    return redirect("/admin/dashboard")
 }
 
 export async function logoutAction() {

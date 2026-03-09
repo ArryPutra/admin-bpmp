@@ -7,23 +7,18 @@ export const adminListMenu = [
             {
                 name: 'Dashboard',
                 icon: BiPieChart,
-                url: '/admin/utama/dashboard'
+                url: '/admin/dashboard'
             }
         ]
     },
     {
-        name: 'Konten Publikasi',
+        name: 'Kelola Konten',
         menus: [
             {
                 name: 'Berita',
                 icon: BiNews,
-                url: '/admin/publikasi/berita'
-            }
-        ]
-    },
-    {
-        name: 'Pengaturan',
-        menus: [
+                url: '/admin/berita'
+            },
             {
                 name: 'Data Statistik',
                 icon: BiData,

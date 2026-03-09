@@ -388,7 +388,8 @@ export const ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
-  DataStatistik: 'DataStatistik'
+  DataStatistik: 'DataStatistik',
+  Berita: 'Berita'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -404,7 +405,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "dataStatistik"
+    modelProps: "user" | "session" | "account" | "verification" | "dataStatistik" | "berita"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -778,6 +779,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Berita: {
+      payload: Prisma.$BeritaPayload<ExtArgs>
+      fields: Prisma.BeritaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BeritaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeritaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BeritaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeritaPayload>
+        }
+        findFirst: {
+          args: Prisma.BeritaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeritaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BeritaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeritaPayload>
+        }
+        findMany: {
+          args: Prisma.BeritaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeritaPayload>[]
+        }
+        create: {
+          args: Prisma.BeritaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeritaPayload>
+        }
+        createMany: {
+          args: Prisma.BeritaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BeritaCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeritaPayload>[]
+        }
+        delete: {
+          args: Prisma.BeritaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeritaPayload>
+        }
+        update: {
+          args: Prisma.BeritaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeritaPayload>
+        }
+        deleteMany: {
+          args: Prisma.BeritaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BeritaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BeritaUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeritaPayload>[]
+        }
+        upsert: {
+          args: Prisma.BeritaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeritaPayload>
+        }
+        aggregate: {
+          args: Prisma.BeritaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBerita>
+        }
+        groupBy: {
+          args: Prisma.BeritaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BeritaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BeritaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BeritaCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -885,6 +960,20 @@ export const DataStatistikScalarFieldEnum = {
 } as const
 
 export type DataStatistikScalarFieldEnum = (typeof DataStatistikScalarFieldEnum)[keyof typeof DataStatistikScalarFieldEnum]
+
+
+export const BeritaScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  judul: 'judul',
+  isi: 'isi',
+  gambar: 'gambar',
+  gambarPublicId: 'gambarPublicId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BeritaScalarFieldEnum = (typeof BeritaScalarFieldEnum)[keyof typeof BeritaScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1079,6 +1168,7 @@ export type GlobalOmitConfig = {
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit
   dataStatistik?: Prisma.DataStatistikOmit
+  berita?: Prisma.BeritaOmit
 }
 
 /* Types for Logging */

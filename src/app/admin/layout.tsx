@@ -1,9 +1,7 @@
 "use client"
 
 import {
-    ChevronDownIcon,
-    LayoutDashboardIcon,
-    SchoolIcon
+    ChevronDownIcon
 } from 'lucide-react'
 import React, { useActionState, useEffect, useState, useTransition } from 'react'
 
@@ -40,7 +38,7 @@ import {
 import adminListMenu from '@/constants/admin-menu'
 import { useProgress, useRouter } from '@bprogress/next'
 import { usePathname } from 'next/navigation'
-import { BiGlobe, BiLogOut, BiNews } from 'react-icons/bi'
+import { BiGlobe, BiLogOut } from 'react-icons/bi'
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     const [today, setToday] = useState('')
@@ -99,6 +97,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <button
+                                    id='admin-quick-menu-trigger'
                                     type='button'
                                     className='hover:bg-muted/60 flex w-full items-center justify-between gap-3 rounded-md p-1 text-left transition-colors'
                                 >
@@ -114,7 +113,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                                     <ChevronDownIcon className='text-muted-foreground size-4' />
                                 </button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent align='start' className='w-56'>
+                            <DropdownMenuContent id='admin-quick-menu-content' align='start' className='w-56'>
                                 <DropdownMenuLabel>Menu Cepat</DropdownMenuLabel>
                                 <DropdownMenuItem onSelect={() => window.open('https://www.bpmpkalsel.web.id', '_blank')}>
                                     <BiGlobe className='size-4' />

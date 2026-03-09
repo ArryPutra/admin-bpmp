@@ -45,7 +45,7 @@ export default function DataStatistik_EditView({
             </Field>
             <Field>
               <FieldLabel>Label</FieldLabel>
-              <Input name="label" defaultValue={dataStatistik.label} placeholder="Masukkan label" />
+              <Input name="label" defaultValue={state?.values?.label || dataStatistik.label} placeholder="Masukkan label" />
               {
                 state?.errors?.label && (
                   <FieldDescription className="text-red-500">{state.errors.label}</FieldDescription>
@@ -54,7 +54,7 @@ export default function DataStatistik_EditView({
             </Field>
             <Field>
               <FieldLabel>Value</FieldLabel>
-              <Input name="value" defaultValue={dataStatistik.value} placeholder="Masukkan value" />
+              <Input name="value" defaultValue={state?.values?.value || dataStatistik.value} placeholder="Masukkan value" />
             </Field>
             <Button className="w-fit">Simpan</Button>
           </FieldSet>

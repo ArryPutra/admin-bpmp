@@ -15,7 +15,7 @@ export async function proxy(request: NextRequest) {
     }
 
     if (session && isLoginRoute) {
-        return NextResponse.redirect(new URL("/admin/utama/dashboard", request.url));
+        return NextResponse.redirect(new URL("/admin/dashboard", request.url));
     }
 
     return NextResponse.next();
