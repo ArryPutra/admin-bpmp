@@ -67,7 +67,17 @@ export type Verification = Prisma.VerificationModel
  */
 export type DataStatistik = Prisma.DataStatistikModel
 /**
+ * Model KategoriBerita
+ * 
+ */
+export type KategoriBerita = Prisma.KategoriBeritaModel
+/**
  * Model Berita
  * 
  */
 export type Berita = Prisma.BeritaModel
+/**
+ * Model DataKonten
+ * 
+ */
+export type DataKonten = Prisma.DataKontenModel

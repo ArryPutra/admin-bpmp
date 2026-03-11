@@ -7,8 +7,47 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { deleteImageAction, uploadImageAction } from "./cloudinary-action";
 
-export async function getAllBeritaAction() {
-    return await prisma.berita.findMany()
+export async function getAllBeritaAction({
+    search,
+    page = 1,
+    kategoriId,
+}: {
+    search?: string
+    page?: number
+    kategoriId?: number
+}) {
+    const _search = search?.trim()
+
+    const where: any = {}
+
+    if (_search) {
+        where.OR = [
+            { judul: { contains: _search, mode: "insensitive" as const } },
+            { isi: { contains: _search, mode: "insensitive" as const } },
+        ]
+    }
+
+    if (kategoriId) {
+        where.kategoriId = kategoriId
+    }
+
+    const [daftarBerita, total] = await Promise.all([
+        prisma.berita.findMany({
+            where,
+            orderBy: {
+                createdAt: "desc"
+            },
+            skip: (page - 1) * 10,
+            take: 10,
+            include: { kategori: true },
+        }),
+        prisma.berita.count({ where })
+    ])
+
+    return {
+        daftarBerita,
+        total
+    }
 }
 
 export async function createBeritaAction(
@@ -59,6 +98,7 @@ export async function createBeritaAction(
                 isi: validatedFields.data.isi,
                 gambar: uploadImage.data?.url,
                 gambarPublicId: uploadImage.data?.public_id,
+                kategoriId: validatedFields.data.kategoriId ?? null,
             }
         })
     } catch (error) {
@@ -121,6 +161,7 @@ export async function updateBeritaAction(
                 isi: validatedFields.data.isi,
                 gambar: uploadImage?.data?.url,
                 gambarPublicId: uploadImage?.data?.public_id,
+                kategoriId: validatedFields.data.kategoriId ?? null,
             }
         })
 

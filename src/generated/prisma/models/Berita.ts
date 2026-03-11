@@ -28,10 +28,12 @@ export type AggregateBerita = {
 
 export type BeritaAvgAggregateOutputType = {
   id: number | null
+  kategoriId: number | null
 }
 
 export type BeritaSumAggregateOutputType = {
   id: number | null
+  kategoriId: number | null
 }
 
 export type BeritaMinAggregateOutputType = {
@@ -41,6 +43,7 @@ export type BeritaMinAggregateOutputType = {
   isi: string | null
   gambar: string | null
   gambarPublicId: string | null
+  kategoriId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -52,6 +55,7 @@ export type BeritaMaxAggregateOutputType = {
   isi: string | null
   gambar: string | null
   gambarPublicId: string | null
+  kategoriId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -63,6 +67,7 @@ export type BeritaCountAggregateOutputType = {
   isi: number
   gambar: number
   gambarPublicId: number
+  kategoriId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -71,10 +76,12 @@ export type BeritaCountAggregateOutputType = {
 
 export type BeritaAvgAggregateInputType = {
   id?: true
+  kategoriId?: true
 }
 
 export type BeritaSumAggregateInputType = {
   id?: true
+  kategoriId?: true
 }
 
 export type BeritaMinAggregateInputType = {
@@ -84,6 +91,7 @@ export type BeritaMinAggregateInputType = {
   isi?: true
   gambar?: true
   gambarPublicId?: true
+  kategoriId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -95,6 +103,7 @@ export type BeritaMaxAggregateInputType = {
   isi?: true
   gambar?: true
   gambarPublicId?: true
+  kategoriId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -106,6 +115,7 @@ export type BeritaCountAggregateInputType = {
   isi?: true
   gambar?: true
   gambarPublicId?: true
+  kategoriId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -204,6 +214,7 @@ export type BeritaGroupByOutputType = {
   isi: string
   gambar: string | null
   gambarPublicId: string | null
+  kategoriId: number | null
   createdAt: Date
   updatedAt: Date
   _count: BeritaCountAggregateOutputType | null
@@ -238,8 +249,10 @@ export type BeritaWhereInput = {
   isi?: Prisma.StringFilter<"Berita"> | string
   gambar?: Prisma.StringNullableFilter<"Berita"> | string | null
   gambarPublicId?: Prisma.StringNullableFilter<"Berita"> | string | null
+  kategoriId?: Prisma.IntNullableFilter<"Berita"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Berita"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Berita"> | Date | string
+  kategori?: Prisma.XOR<Prisma.KategoriBeritaNullableScalarRelationFilter, Prisma.KategoriBeritaWhereInput> | null
 }
 
 export type BeritaOrderByWithRelationInput = {
@@ -249,8 +262,10 @@ export type BeritaOrderByWithRelationInput = {
   isi?: Prisma.SortOrder
   gambar?: Prisma.SortOrderInput | Prisma.SortOrder
   gambarPublicId?: Prisma.SortOrderInput | Prisma.SortOrder
+  kategoriId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  kategori?: Prisma.KategoriBeritaOrderByWithRelationInput
 }
 
 export type BeritaWhereUniqueInput = Prisma.AtLeast<{
@@ -263,8 +278,10 @@ export type BeritaWhereUniqueInput = Prisma.AtLeast<{
   isi?: Prisma.StringFilter<"Berita"> | string
   gambar?: Prisma.StringNullableFilter<"Berita"> | string | null
   gambarPublicId?: Prisma.StringNullableFilter<"Berita"> | string | null
+  kategoriId?: Prisma.IntNullableFilter<"Berita"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Berita"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Berita"> | Date | string
+  kategori?: Prisma.XOR<Prisma.KategoriBeritaNullableScalarRelationFilter, Prisma.KategoriBeritaWhereInput> | null
 }, "id" | "slug">
 
 export type BeritaOrderByWithAggregationInput = {
@@ -274,6 +291,7 @@ export type BeritaOrderByWithAggregationInput = {
   isi?: Prisma.SortOrder
   gambar?: Prisma.SortOrderInput | Prisma.SortOrder
   gambarPublicId?: Prisma.SortOrderInput | Prisma.SortOrder
+  kategoriId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.BeritaCountOrderByAggregateInput
@@ -293,6 +311,7 @@ export type BeritaScalarWhereWithAggregatesInput = {
   isi?: Prisma.StringWithAggregatesFilter<"Berita"> | string
   gambar?: Prisma.StringNullableWithAggregatesFilter<"Berita"> | string | null
   gambarPublicId?: Prisma.StringNullableWithAggregatesFilter<"Berita"> | string | null
+  kategoriId?: Prisma.IntNullableWithAggregatesFilter<"Berita"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Berita"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Berita"> | Date | string
 }
@@ -305,6 +324,7 @@ export type BeritaCreateInput = {
   gambarPublicId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  kategori?: Prisma.KategoriBeritaCreateNestedOneWithoutBeritaInput
 }
 
 export type BeritaUncheckedCreateInput = {
@@ -314,6 +334,7 @@ export type BeritaUncheckedCreateInput = {
   isi: string
   gambar?: string | null
   gambarPublicId?: string | null
+  kategoriId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -326,6 +347,7 @@ export type BeritaUpdateInput = {
   gambarPublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kategori?: Prisma.KategoriBeritaUpdateOneWithoutBeritaNestedInput
 }
 
 export type BeritaUncheckedUpdateInput = {
@@ -335,6 +357,7 @@ export type BeritaUncheckedUpdateInput = {
   isi?: Prisma.StringFieldUpdateOperationsInput | string
   gambar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gambarPublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kategoriId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -346,6 +369,7 @@ export type BeritaCreateManyInput = {
   isi: string
   gambar?: string | null
   gambarPublicId?: string | null
+  kategoriId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -367,8 +391,19 @@ export type BeritaUncheckedUpdateManyInput = {
   isi?: Prisma.StringFieldUpdateOperationsInput | string
   gambar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gambarPublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kategoriId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BeritaListRelationFilter = {
+  every?: Prisma.BeritaWhereInput
+  some?: Prisma.BeritaWhereInput
+  none?: Prisma.BeritaWhereInput
+}
+
+export type BeritaOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type BeritaCountOrderByAggregateInput = {
@@ -378,12 +413,14 @@ export type BeritaCountOrderByAggregateInput = {
   isi?: Prisma.SortOrder
   gambar?: Prisma.SortOrder
   gambarPublicId?: Prisma.SortOrder
+  kategoriId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type BeritaAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  kategoriId?: Prisma.SortOrder
 }
 
 export type BeritaMaxOrderByAggregateInput = {
@@ -393,6 +430,7 @@ export type BeritaMaxOrderByAggregateInput = {
   isi?: Prisma.SortOrder
   gambar?: Prisma.SortOrder
   gambarPublicId?: Prisma.SortOrder
+  kategoriId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -404,12 +442,169 @@ export type BeritaMinOrderByAggregateInput = {
   isi?: Prisma.SortOrder
   gambar?: Prisma.SortOrder
   gambarPublicId?: Prisma.SortOrder
+  kategoriId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type BeritaSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  kategoriId?: Prisma.SortOrder
+}
+
+export type BeritaCreateNestedManyWithoutKategoriInput = {
+  create?: Prisma.XOR<Prisma.BeritaCreateWithoutKategoriInput, Prisma.BeritaUncheckedCreateWithoutKategoriInput> | Prisma.BeritaCreateWithoutKategoriInput[] | Prisma.BeritaUncheckedCreateWithoutKategoriInput[]
+  connectOrCreate?: Prisma.BeritaCreateOrConnectWithoutKategoriInput | Prisma.BeritaCreateOrConnectWithoutKategoriInput[]
+  createMany?: Prisma.BeritaCreateManyKategoriInputEnvelope
+  connect?: Prisma.BeritaWhereUniqueInput | Prisma.BeritaWhereUniqueInput[]
+}
+
+export type BeritaUncheckedCreateNestedManyWithoutKategoriInput = {
+  create?: Prisma.XOR<Prisma.BeritaCreateWithoutKategoriInput, Prisma.BeritaUncheckedCreateWithoutKategoriInput> | Prisma.BeritaCreateWithoutKategoriInput[] | Prisma.BeritaUncheckedCreateWithoutKategoriInput[]
+  connectOrCreate?: Prisma.BeritaCreateOrConnectWithoutKategoriInput | Prisma.BeritaCreateOrConnectWithoutKategoriInput[]
+  createMany?: Prisma.BeritaCreateManyKategoriInputEnvelope
+  connect?: Prisma.BeritaWhereUniqueInput | Prisma.BeritaWhereUniqueInput[]
+}
+
+export type BeritaUpdateManyWithoutKategoriNestedInput = {
+  create?: Prisma.XOR<Prisma.BeritaCreateWithoutKategoriInput, Prisma.BeritaUncheckedCreateWithoutKategoriInput> | Prisma.BeritaCreateWithoutKategoriInput[] | Prisma.BeritaUncheckedCreateWithoutKategoriInput[]
+  connectOrCreate?: Prisma.BeritaCreateOrConnectWithoutKategoriInput | Prisma.BeritaCreateOrConnectWithoutKategoriInput[]
+  upsert?: Prisma.BeritaUpsertWithWhereUniqueWithoutKategoriInput | Prisma.BeritaUpsertWithWhereUniqueWithoutKategoriInput[]
+  createMany?: Prisma.BeritaCreateManyKategoriInputEnvelope
+  set?: Prisma.BeritaWhereUniqueInput | Prisma.BeritaWhereUniqueInput[]
+  disconnect?: Prisma.BeritaWhereUniqueInput | Prisma.BeritaWhereUniqueInput[]
+  delete?: Prisma.BeritaWhereUniqueInput | Prisma.BeritaWhereUniqueInput[]
+  connect?: Prisma.BeritaWhereUniqueInput | Prisma.BeritaWhereUniqueInput[]
+  update?: Prisma.BeritaUpdateWithWhereUniqueWithoutKategoriInput | Prisma.BeritaUpdateWithWhereUniqueWithoutKategoriInput[]
+  updateMany?: Prisma.BeritaUpdateManyWithWhereWithoutKategoriInput | Prisma.BeritaUpdateManyWithWhereWithoutKategoriInput[]
+  deleteMany?: Prisma.BeritaScalarWhereInput | Prisma.BeritaScalarWhereInput[]
+}
+
+export type BeritaUncheckedUpdateManyWithoutKategoriNestedInput = {
+  create?: Prisma.XOR<Prisma.BeritaCreateWithoutKategoriInput, Prisma.BeritaUncheckedCreateWithoutKategoriInput> | Prisma.BeritaCreateWithoutKategoriInput[] | Prisma.BeritaUncheckedCreateWithoutKategoriInput[]
+  connectOrCreate?: Prisma.BeritaCreateOrConnectWithoutKategoriInput | Prisma.BeritaCreateOrConnectWithoutKategoriInput[]
+  upsert?: Prisma.BeritaUpsertWithWhereUniqueWithoutKategoriInput | Prisma.BeritaUpsertWithWhereUniqueWithoutKategoriInput[]
+  createMany?: Prisma.BeritaCreateManyKategoriInputEnvelope
+  set?: Prisma.BeritaWhereUniqueInput | Prisma.BeritaWhereUniqueInput[]
+  disconnect?: Prisma.BeritaWhereUniqueInput | Prisma.BeritaWhereUniqueInput[]
+  delete?: Prisma.BeritaWhereUniqueInput | Prisma.BeritaWhereUniqueInput[]
+  connect?: Prisma.BeritaWhereUniqueInput | Prisma.BeritaWhereUniqueInput[]
+  update?: Prisma.BeritaUpdateWithWhereUniqueWithoutKategoriInput | Prisma.BeritaUpdateWithWhereUniqueWithoutKategoriInput[]
+  updateMany?: Prisma.BeritaUpdateManyWithWhereWithoutKategoriInput | Prisma.BeritaUpdateManyWithWhereWithoutKategoriInput[]
+  deleteMany?: Prisma.BeritaScalarWhereInput | Prisma.BeritaScalarWhereInput[]
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type BeritaCreateWithoutKategoriInput = {
+  slug: string
+  judul: string
+  isi: string
+  gambar?: string | null
+  gambarPublicId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type BeritaUncheckedCreateWithoutKategoriInput = {
+  id?: number
+  slug: string
+  judul: string
+  isi: string
+  gambar?: string | null
+  gambarPublicId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type BeritaCreateOrConnectWithoutKategoriInput = {
+  where: Prisma.BeritaWhereUniqueInput
+  create: Prisma.XOR<Prisma.BeritaCreateWithoutKategoriInput, Prisma.BeritaUncheckedCreateWithoutKategoriInput>
+}
+
+export type BeritaCreateManyKategoriInputEnvelope = {
+  data: Prisma.BeritaCreateManyKategoriInput | Prisma.BeritaCreateManyKategoriInput[]
+  skipDuplicates?: boolean
+}
+
+export type BeritaUpsertWithWhereUniqueWithoutKategoriInput = {
+  where: Prisma.BeritaWhereUniqueInput
+  update: Prisma.XOR<Prisma.BeritaUpdateWithoutKategoriInput, Prisma.BeritaUncheckedUpdateWithoutKategoriInput>
+  create: Prisma.XOR<Prisma.BeritaCreateWithoutKategoriInput, Prisma.BeritaUncheckedCreateWithoutKategoriInput>
+}
+
+export type BeritaUpdateWithWhereUniqueWithoutKategoriInput = {
+  where: Prisma.BeritaWhereUniqueInput
+  data: Prisma.XOR<Prisma.BeritaUpdateWithoutKategoriInput, Prisma.BeritaUncheckedUpdateWithoutKategoriInput>
+}
+
+export type BeritaUpdateManyWithWhereWithoutKategoriInput = {
+  where: Prisma.BeritaScalarWhereInput
+  data: Prisma.XOR<Prisma.BeritaUpdateManyMutationInput, Prisma.BeritaUncheckedUpdateManyWithoutKategoriInput>
+}
+
+export type BeritaScalarWhereInput = {
+  AND?: Prisma.BeritaScalarWhereInput | Prisma.BeritaScalarWhereInput[]
+  OR?: Prisma.BeritaScalarWhereInput[]
+  NOT?: Prisma.BeritaScalarWhereInput | Prisma.BeritaScalarWhereInput[]
+  id?: Prisma.IntFilter<"Berita"> | number
+  slug?: Prisma.StringFilter<"Berita"> | string
+  judul?: Prisma.StringFilter<"Berita"> | string
+  isi?: Prisma.StringFilter<"Berita"> | string
+  gambar?: Prisma.StringNullableFilter<"Berita"> | string | null
+  gambarPublicId?: Prisma.StringNullableFilter<"Berita"> | string | null
+  kategoriId?: Prisma.IntNullableFilter<"Berita"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"Berita"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Berita"> | Date | string
+}
+
+export type BeritaCreateManyKategoriInput = {
+  id?: number
+  slug: string
+  judul: string
+  isi: string
+  gambar?: string | null
+  gambarPublicId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type BeritaUpdateWithoutKategoriInput = {
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  judul?: Prisma.StringFieldUpdateOperationsInput | string
+  isi?: Prisma.StringFieldUpdateOperationsInput | string
+  gambar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gambarPublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BeritaUncheckedUpdateWithoutKategoriInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  judul?: Prisma.StringFieldUpdateOperationsInput | string
+  isi?: Prisma.StringFieldUpdateOperationsInput | string
+  gambar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gambarPublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BeritaUncheckedUpdateManyWithoutKategoriInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  judul?: Prisma.StringFieldUpdateOperationsInput | string
+  isi?: Prisma.StringFieldUpdateOperationsInput | string
+  gambar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gambarPublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -421,8 +616,10 @@ export type BeritaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   isi?: boolean
   gambar?: boolean
   gambarPublicId?: boolean
+  kategoriId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  kategori?: boolean | Prisma.Berita$kategoriArgs<ExtArgs>
 }, ExtArgs["result"]["berita"]>
 
 export type BeritaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -432,8 +629,10 @@ export type BeritaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   isi?: boolean
   gambar?: boolean
   gambarPublicId?: boolean
+  kategoriId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  kategori?: boolean | Prisma.Berita$kategoriArgs<ExtArgs>
 }, ExtArgs["result"]["berita"]>
 
 export type BeritaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -443,8 +642,10 @@ export type BeritaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   isi?: boolean
   gambar?: boolean
   gambarPublicId?: boolean
+  kategoriId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  kategori?: boolean | Prisma.Berita$kategoriArgs<ExtArgs>
 }, ExtArgs["result"]["berita"]>
 
 export type BeritaSelectScalar = {
@@ -454,15 +655,27 @@ export type BeritaSelectScalar = {
   isi?: boolean
   gambar?: boolean
   gambarPublicId?: boolean
+  kategoriId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BeritaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "judul" | "isi" | "gambar" | "gambarPublicId" | "createdAt" | "updatedAt", ExtArgs["result"]["berita"]>
+export type BeritaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "judul" | "isi" | "gambar" | "gambarPublicId" | "kategoriId" | "createdAt" | "updatedAt", ExtArgs["result"]["berita"]>
+export type BeritaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  kategori?: boolean | Prisma.Berita$kategoriArgs<ExtArgs>
+}
+export type BeritaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  kategori?: boolean | Prisma.Berita$kategoriArgs<ExtArgs>
+}
+export type BeritaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  kategori?: boolean | Prisma.Berita$kategoriArgs<ExtArgs>
+}
 
 export type $BeritaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Berita"
-  objects: {}
+  objects: {
+    kategori: Prisma.$KategoriBeritaPayload<ExtArgs> | null
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     slug: string
@@ -470,6 +683,7 @@ export type $BeritaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     isi: string
     gambar: string | null
     gambarPublicId: string | null
+    kategoriId: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["berita"]>
@@ -866,6 +1080,7 @@ readonly fields: BeritaFieldRefs;
  */
 export interface Prisma__BeritaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  kategori<T extends Prisma.Berita$kategoriArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Berita$kategoriArgs<ExtArgs>>): Prisma.Prisma__KategoriBeritaClient<runtime.Types.Result.GetResult<Prisma.$KategoriBeritaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -901,6 +1116,7 @@ export interface BeritaFieldRefs {
   readonly isi: Prisma.FieldRef<"Berita", 'String'>
   readonly gambar: Prisma.FieldRef<"Berita", 'String'>
   readonly gambarPublicId: Prisma.FieldRef<"Berita", 'String'>
+  readonly kategoriId: Prisma.FieldRef<"Berita", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Berita", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Berita", 'DateTime'>
 }
@@ -920,6 +1136,10 @@ export type BeritaFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   omit?: Prisma.BeritaOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BeritaInclude<ExtArgs> | null
+  /**
    * Filter, which Berita to fetch.
    */
   where: Prisma.BeritaWhereUniqueInput
@@ -938,6 +1158,10 @@ export type BeritaFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.BeritaOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BeritaInclude<ExtArgs> | null
+  /**
    * Filter, which Berita to fetch.
    */
   where: Prisma.BeritaWhereUniqueInput
@@ -955,6 +1179,10 @@ export type BeritaFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Berita
    */
   omit?: Prisma.BeritaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BeritaInclude<ExtArgs> | null
   /**
    * Filter, which Berita to fetch.
    */
@@ -1004,6 +1232,10 @@ export type BeritaFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.
    */
   omit?: Prisma.BeritaOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BeritaInclude<ExtArgs> | null
+  /**
    * Filter, which Berita to fetch.
    */
   where?: Prisma.BeritaWhereInput
@@ -1052,6 +1284,10 @@ export type BeritaFindManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.BeritaOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BeritaInclude<ExtArgs> | null
+  /**
    * Filter, which Beritas to fetch.
    */
   where?: Prisma.BeritaWhereInput
@@ -1095,6 +1331,10 @@ export type BeritaCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.BeritaOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BeritaInclude<ExtArgs> | null
+  /**
    * The data needed to create a Berita.
    */
   data: Prisma.XOR<Prisma.BeritaCreateInput, Prisma.BeritaUncheckedCreateInput>
@@ -1128,6 +1368,10 @@ export type BeritaCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    */
   data: Prisma.BeritaCreateManyInput | Prisma.BeritaCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BeritaIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1142,6 +1386,10 @@ export type BeritaUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Berita
    */
   omit?: Prisma.BeritaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BeritaInclude<ExtArgs> | null
   /**
    * The data needed to update a Berita.
    */
@@ -1194,6 +1442,10 @@ export type BeritaUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many Beritas to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BeritaIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1208,6 +1460,10 @@ export type BeritaUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Berita
    */
   omit?: Prisma.BeritaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BeritaInclude<ExtArgs> | null
   /**
    * The filter to search for the Berita to update in case it exists.
    */
@@ -1235,6 +1491,10 @@ export type BeritaDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.BeritaOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BeritaInclude<ExtArgs> | null
+  /**
    * Filter which Berita to delete.
    */
   where: Prisma.BeritaWhereUniqueInput
@@ -1255,6 +1515,25 @@ export type BeritaDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
+ * Berita.kategori
+ */
+export type Berita$kategoriArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the KategoriBerita
+   */
+  select?: Prisma.KategoriBeritaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the KategoriBerita
+   */
+  omit?: Prisma.KategoriBeritaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.KategoriBeritaInclude<ExtArgs> | null
+  where?: Prisma.KategoriBeritaWhereInput
+}
+
+/**
  * Berita without action
  */
 export type BeritaDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1266,4 +1545,8 @@ export type BeritaDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Berita
    */
   omit?: Prisma.BeritaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BeritaInclude<ExtArgs> | null
 }

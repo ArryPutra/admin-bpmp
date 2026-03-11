@@ -1,13 +1,41 @@
 "use server"
 
 import prisma from "@/lib/prisma";
-import { CreateDataStatistikSchema, UpdateDataStatistikSchema } from "@/schemas/DataStatistik";
+import { CreateDataStatistikSchema, UpdateDataStatistikSchema } from "@/schemas/DataStatistikSchema";
 import ActionState from "@/types/ActionState";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function getAllDataStatistik() {
+export async function getAllDataStatistik({
+    search = "",
+    group
+}: {
+    search?: string
+    group?: string
+}) {
+    const _search = search.trim() || ""
+
     return await prisma.dataStatistik.findMany({
+        where: {
+            group: {
+                contains: _search,
+                mode: "insensitive"
+            },
+            OR: [
+                {
+                    key: {
+                        contains: _search,
+                        mode: "insensitive"
+                    }
+                },
+                {
+                    label: {
+                        contains: _search,
+                        mode: "insensitive"
+                    }
+                }
+            ]
+        },
         orderBy: {
             createdAt: "asc"
         }
@@ -47,6 +75,7 @@ export async function createDataStatistikAction(
     try {
         await prisma.dataStatistik.create({
             data: {
+                group: validatedFields.data.group,
                 key: validatedFields.data.key,
                 label: validatedFields.data.label,
                 value: validatedFields.data.value,
@@ -90,6 +119,7 @@ export async function updateDataStatistikAction(
         await prisma.dataStatistik.update({
             where: { id: id },
             data: {
+                group: validatedFields.data.group,
                 label: validatedFields.data.label,
                 value: validatedFields.data.value,
             }

@@ -1,6 +1,15 @@
-import { BiData, BiNews, BiPieChart } from "react-icons/bi";
+import { BiCategory, BiData, BiNews, BiPieChart, BiText } from "react-icons/bi";
 
-export const adminListMenu = [
+type Menu = {
+    name: string,
+    menus: {
+        name: string,
+        icon: React.ComponentType,
+        url: string
+    }[]
+}[]
+
+export const adminListMenu: Menu = [
     {
         name: 'Utama',
         menus: [
@@ -12,12 +21,27 @@ export const adminListMenu = [
         ]
     },
     {
-        name: 'Kelola Konten',
+        name: "Kelola Berita",
         menus: [
             {
                 name: 'Berita',
                 icon: BiNews,
                 url: '/admin/berita'
+            },
+            {
+                name: 'Kategori Berita',
+                icon: BiCategory,
+                url: '/admin/kategori-berita'
+            },
+        ]
+    },
+    {
+        name: 'Kelola Konten',
+        menus: [
+            {
+                name: 'Data Konten',
+                icon: BiText,
+                url: '/admin/data-konten'
             },
             {
                 name: 'Data Statistik',

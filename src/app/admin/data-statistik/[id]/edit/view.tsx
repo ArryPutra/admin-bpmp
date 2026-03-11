@@ -39,6 +39,15 @@ export default function DataStatistik_EditView({
         <form action={formAction}>
           <FieldSet>
             <Field>
+              <FieldLabel>Group</FieldLabel>
+              <Input name="group" defaultValue={state?.values?.group || dataStatistik.group} placeholder="Masukkan group" />
+              {
+                state?.errors?.group && (
+                  <FieldDescription className="text-red-500">{state.errors.group}</FieldDescription>
+                )
+              }
+            </Field>
+            <Field>
               <FieldLabel>Key</FieldLabel>
               <Input defaultValue={dataStatistik.key} disabled />
               <FieldDescription>Key tidak dapat diubah untuk menjaga konsistensi data</FieldDescription>

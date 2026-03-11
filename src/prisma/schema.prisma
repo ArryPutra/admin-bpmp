@@ -77,14 +77,28 @@ model Verification {
 }
 
 model DataStatistik {
-  id        Int      @id @default(autoincrement())
-  key       String   @unique
-  label     String
-  value     String
+  id Int @id @default(autoincrement())
+
+  group String @default("umum")
+  key   String
+  label String
+  value String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([group, key])
   @@map("data_statistik")
+}
+
+model KategoriBerita {
+  id        Int      @id @default(autoincrement())
+  nama      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  berita    Berita[]
+
+  @@map("kategori_berita")
 }
 
 model Berita {
@@ -97,8 +111,26 @@ model Berita {
   gambar         String?
   gambarPublicId String?
 
+  kategoriId Int?
+  kategori   KategoriBerita? @relation(fields: [kategoriId], references: [id], onDelete: SetNull)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("berita")
+}
+
+model DataKonten {
+  id Int @id @default(autoincrement())
+
+  group String @default("umum")
+  label String
+  key   String
+  value String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([group, key])
+  @@map("data_konten")
 }

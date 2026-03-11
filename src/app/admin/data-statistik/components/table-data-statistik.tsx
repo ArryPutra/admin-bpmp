@@ -19,6 +19,7 @@ export default function TableDataStatistik({
             <TableHeader>
                 <TableRow>
                     <TableHead>No.</TableHead>
+                    <TableHead>Group</TableHead>
                     <TableHead>Key</TableHead>
                     <TableHead>Label</TableHead>
                     <TableHead>Value</TableHead>
@@ -32,8 +33,9 @@ export default function TableDataStatistik({
                     daftarDataStatistik.map((dataStatistik, index) => (
                         <TableRow key={dataStatistik.id}>
                             <TableCell>{index + 1}</TableCell>
+                            <TableCell>{dataStatistik.group}</TableCell>
                             <TableCell>{dataStatistik.key}</TableCell>
-                            <TableCell>{dataStatistik.label}</TableCell>
+                            <TableCell className='font-medium'>{dataStatistik.label}</TableCell>
                             <TableCell>{dataStatistik.value}</TableCell>
                             <TableCell>{formatTanggalWaktuIndonesia(dataStatistik.createdAt)}</TableCell>
                             <TableCell>{formatTanggalWaktuIndonesia(dataStatistik.updatedAt)}</TableCell>
@@ -50,9 +52,6 @@ export default function TableDataStatistik({
                     ))
                 }
             </TableBody>
-            <TableCaption>
-                Total Data Statistik: {daftarDataStatistik.length}
-            </TableCaption>
         </Table>
     )
 }

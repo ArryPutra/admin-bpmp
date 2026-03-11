@@ -1,28 +1,34 @@
 "use server"
 
 import { getAllBeritaAction } from '@/actions/berita-action'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import Link from 'next/link'
-import { BiPlus } from 'react-icons/bi'
-import TableBerita from './components/table-berita'
+import Berita_View from './view'
+import { getAllKategoriBerita } from '@/actions/kategori-berita-action'
 
-export default async function Berita_Page() {
-  const daftarBerita = await getAllBeritaAction()
+export default async function Berita_Page({
+  searchParams
+}: {
+  searchParams: Promise<{
+    search?: string
+    page?: string
+    kategoriId?: string
+  }>
+}) {
+
+  const _searchParams = await searchParams
+
+  const { daftarBerita, total } = await getAllBeritaAction({
+    search: _searchParams.search,
+    page: _searchParams.page ? parseInt(_searchParams.page) : 1,
+    kategoriId: Number(_searchParams.kategoriId) ?? undefined
+  })
+
+  const daftarKategori = await getAllKategoriBerita()
 
   return (
-    <Card>
-      <CardHeader>
-        <Link href='/admin/berita/create'>
-          <Button>
-            Tambah Berita <BiPlus />
-          </Button>
-        </Link>
-      </CardHeader>
-      <CardContent>
-        <TableBerita
-          daftarBerita={daftarBerita} />
-      </CardContent>
-    </Card>
+    <Berita_View
+      daftarBerita={daftarBerita}
+      totalDaftarBerita={total}
+      daftarKategori={daftarKategori}
+    />
   )
 }

@@ -8,9 +8,11 @@ import { useActionState } from 'react'
 import FormBerita from '../../components/form-berita'
 
 export default function BeritaEdit_View({
-    berita
+    berita,
+    daftarKategori = [],
 }: {
     berita: any
+    daftarKategori?: { id: number; nama: string }[]
 }) {
     const [state, formAction, pending] =
         useActionState(updateBeritaAction, null)
@@ -28,6 +30,7 @@ export default function BeritaEdit_View({
                         state, formAction, pending
                     }}
                     berita={berita}
+                    daftarKategori={daftarKategori}
                 />
             </CardContent>
             <Separator />

@@ -5,12 +5,14 @@ import SingleImageUpload from '@/components/shared/single-image-upload'
 import { Button } from '@/components/ui/button'
 import { Field, FieldError, FieldLabel, FieldSet } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { useProgress } from '@bprogress/next'
 import { useEffect } from 'react'
 
 export default function FormBerita({
     actionState,
-    berita
+    berita,
+    daftarKategori = [],
 }: {
     actionState: {
         state: any
@@ -18,8 +20,8 @@ export default function FormBerita({
         pending: boolean
     }
     berita?: any
+    daftarKategori?: { id: number; nama: string }[]
 }) {
-
 
     const progress = useProgress()
 
@@ -51,6 +53,28 @@ export default function FormBerita({
                     }
                 </Field>
                 <Field>
+                    <FieldLabel>Kategori</FieldLabel>
+                    <Select
+                        name="kategoriId"
+                        defaultValue={
+                            String(berita?.kategoriId ?? actionState.state?.values?.kategoriId ?? "")
+                        }
+                    >
+                        <SelectTrigger>
+                            <SelectValue placeholder="Pilih kategori (opsional)" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {daftarKategori.map(k => (
+                                <SelectItem key={k.id} value={String(k.id)}>{k.nama}</SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                    {
+                        actionState.state?.errors?.kategoriId &&
+                        <FieldError>{actionState.state.errors.kategoriId[0]}</FieldError>
+                    }
+                </Field>
+                <Field>
                     <FieldLabel>Isi</FieldLabel>
                     <RichTextEditor
                         name='isi'
@@ -74,7 +98,7 @@ export default function FormBerita({
                         <FieldError>{actionState.state.errors.gambar[0]}</FieldError>
                     }
                 </Field>
-                <Button className="w-fit">
+                <Button className="w-fit" type="submit">
                     {berita ? "Perbarui" : "Tambah"}
                 </Button>
             </FieldSet>

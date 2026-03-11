@@ -8,9 +8,11 @@ import { AlertDialogAction } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { formatTanggalWaktuIndonesia } from '@/utils/formatTanggalWaktuIndonesia'
+import { getRowNumber } from '@/utils/getRowNumber'
 import { useProgress } from '@bprogress/next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { useActionState, useEffect } from 'react'
 import { BiEdit, BiTrash } from 'react-icons/bi'
 
@@ -24,6 +26,8 @@ export default function TableBerita({
         useActionState(deleteBeritaAction, null)
 
     const progress = useProgress()
+    const searchParams = useSearchParams()
+    const currentPage = parseInt(searchParams.get('page') as string) || 1
 
     useEffect(() => {
         if (deleteBeritaPending) {
@@ -49,7 +53,8 @@ export default function TableBerita({
                 <TableHeader>
                     <TableRow>
                         <TableHead>No.</TableHead>
-                        <TableHead>Judul</TableHead>
+                        <TableHead className='max-w-xs'>Judul</TableHead>
+                        <TableHead>Kategori</TableHead>
                         <TableHead>Gambar</TableHead>
                         <TableHead>Tanggal Dibuat</TableHead>
                         <TableHead>Aksi</TableHead>
@@ -60,12 +65,15 @@ export default function TableBerita({
                         daftarBerita.length > 0 ?
                             daftarBerita.map((berita, index) => (
                                 <TableRow key={berita.id}>
-                                    <TableCell>{index + 1}</TableCell>
-                                    <TableCell>
+                                    <TableCell>{getRowNumber(index, currentPage)}</TableCell>
+                                    <TableCell className='truncate max-w-xs'>
                                         <TextLink
-                                            url={`https://bpmpkalsel.web.id/berita/${berita.slug}`}
+                                            url={`https://www.bpmpkalsel.web.id/berita/${berita.slug}`}
                                             children={berita.judul}
                                             targetBlank={true} />
+                                    </TableCell>
+                                    <TableCell>
+                                        {berita.kategori?.nama ?? <span className='text-muted-foreground text-xs'>-</span>}
                                     </TableCell>
                                     <TableCell>
                                         <Image
@@ -73,7 +81,8 @@ export default function TableBerita({
                                             src={berita.gambar}
                                             width={1920}
                                             height={1080}
-                                            className='rounded-md h-20 w-32' />
+                                            className='rounded-md aspect-video min-w-40 max-w-40 object-cover'
+                                        />
                                     </TableCell>
                                     <TableCell>{formatTanggalWaktuIndonesia(berita.createdAt)}</TableCell>
                                     <TableCell className='space-x-3'>

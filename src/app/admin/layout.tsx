@@ -145,7 +145,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                                                             isActive={activeSubmenu === menu.name}
                                                             onClick={() => onClickMenu(menu)}
                                                         >
-                                                            <menu.icon className='size-5' />
+                                                            <menu.icon />
                                                             <span>{menu.name}</span>
                                                         </SidebarMenuButton>
                                                     </SidebarMenuItem>

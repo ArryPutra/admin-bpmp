@@ -7,8 +7,7 @@ export default async function DataStatistik_EditPage({
     params
 }: {
     params: Promise<{ id: string }>
-}
-) {
+}) {
 
     const _params = await params
 

@@ -1,12 +1,16 @@
 "use client"
 
+import { uploadImageAction } from "@/actions/cloudinary-action"
+import { Spinner } from "@/components/ui/spinner"
 import { cn } from "@/lib/utils"
+import Image from "@tiptap/extension-image"
 import { EditorContent, useEditor } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
 import {
     Bold,
     Heading2,
     Heading3,
+    ImagePlus,
     Italic,
     List,
     ListOrdered,
@@ -14,9 +18,10 @@ import {
     Redo2,
     RotateCcw,
     Strikethrough,
+    Trash2,
     Undo2,
 } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 interface RichTextEditorProps {
     name: string
@@ -61,16 +66,26 @@ export default function RichTextEditor({
     placeholder = "Tulis isi berita di sini...",
 }: RichTextEditorProps) {
     const [html, setHtml] = useState(defaultValue)
+    const [isUploading, setIsUploading] = useState(false)
+    const [uploadError, setUploadError] = useState("")
+    const inputRef = useRef<HTMLInputElement>(null)
 
     const editor = useEditor({
-        extensions: [StarterKit],
+        extensions: [
+            StarterKit,
+            Image.configure({
+                HTMLAttributes: {
+                    class: "my-4 h-auto max-w-full rounded-md",
+                },
+            }),
+        ],
         content: defaultValue,
         immediatelyRender: false,
         shouldRerenderOnTransaction: true,
         editorProps: {
             attributes: {
                 class:
-                    "min-h-[220px] p-4 focus:outline-none [&_h2]:text-xl [&_h2]:font-semibold [&_h3]:text-lg [&_h3]:font-semibold [&_blockquote]:border-l-4 [&_blockquote]:pl-4 [&_blockquote]:italic [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5",
+                    "min-h-[220px] p-4 focus:outline-none [&_h2]:text-xl [&_h2]:font-semibold [&_h3]:text-lg [&_h3]:font-semibold [&_blockquote]:border-l-4 [&_blockquote]:pl-4 [&_blockquote]:italic [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_img.ProseMirror-selectednode]:ring-2 [&_img.ProseMirror-selectednode]:ring-primary [&_img.ProseMirror-selectednode]:ring-offset-2 [&_img.ProseMirror-selectednode]:ring-offset-background",
             },
         },
         onUpdate: ({ editor: tiptapEditor }) => {
@@ -91,10 +106,56 @@ export default function RichTextEditor({
     }, [defaultValue, editor])
 
     const isReady = Boolean(editor)
+    const isEmpty = html.trim() === ""
+
+    const handleClearFormatting = () => {
+        if (!editor) return
+
+        editor.chain().focus().unsetAllMarks().clearNodes().setParagraph().run()
+    }
+
+    const handleChooseImage = () => {
+        if (isUploading) return
+        inputRef.current?.click()
+    }
+
+    const handleUploadImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0]
+        event.target.value = ""
+
+        if (!file || !editor) return
+
+        setUploadError("")
+        setIsUploading(true)
+
+        const result = await uploadImageAction(file, "bpmp-berita/rich-text")
+
+        if (!result.success || !result.data?.url) {
+            setUploadError(result.error ?? "Gagal upload gambar. Coba lagi.")
+            setIsUploading(false)
+            return
+        }
+
+        editor.chain().focus().setImage({ src: result.data.url, alt: file.name }).run()
+        setIsUploading(false)
+    }
+
+    const handleDeleteSelectedImage = () => {
+        if (!editor || !editor.isActive("image")) return
+
+        editor.chain().focus().deleteSelection().run()
+    }
 
     return (
         <div className="overflow-hidden rounded-lg border bg-card">
             <input type="hidden" name={name} value={html} />
+            <input
+                ref={inputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                className="hidden"
+                onChange={handleUploadImage}
+            />
 
             <div className="flex flex-wrap items-center gap-2 border-b bg-muted/40 p-2">
                 <ToolbarButton
@@ -162,6 +223,20 @@ export default function RichTextEditor({
                     <Quote className="h-4 w-4" />
                 </ToolbarButton>
                 <ToolbarButton
+                    label={isUploading ? "Uploading..." : "Upload Image"}
+                    disabled={!editor || isUploading}
+                    onClick={handleChooseImage}
+                >
+                    {isUploading ? <Spinner className="h-4 w-4" /> : <ImagePlus className="h-4 w-4" />}
+                </ToolbarButton>
+                <ToolbarButton
+                    label="Delete Selected Image"
+                    disabled={!editor?.isActive("image")}
+                    onClick={handleDeleteSelectedImage}
+                >
+                    <Trash2 className="h-4 w-4" />
+                </ToolbarButton>
+                <ToolbarButton
                     label="Undo"
                     disabled={!editor?.can().chain().focus().undo().run()}
                     onClick={() => editor?.chain().focus().undo().run()}
@@ -177,18 +252,35 @@ export default function RichTextEditor({
                 </ToolbarButton>
                 <ToolbarButton
                     label="Clear Format"
-                    disabled={!editor?.can().chain().focus().clearNodes().unsetAllMarks().run()}
-                    onClick={() => editor?.chain().focus().clearNodes().unsetAllMarks().run()}
+                    disabled={!editor}
+                    onClick={handleClearFormatting}
                 >
                     <RotateCcw className="h-4 w-4" />
                 </ToolbarButton>
             </div>
 
-            <EditorContent editor={editor} />
+            <div className="relative">
+                <EditorContent editor={editor} />
+
+                {isUploading && (
+                    <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-center border-b bg-background/95 py-2 text-xs text-muted-foreground">
+                        <Spinner className="mr-2 h-4 w-4" />
+                        Sedang mengunggah gambar...
+                    </div>
+                )}
+
+                {isReady && isEmpty && (
+                    <div className="pointer-events-none absolute left-4 top-4 text-sm text-muted-foreground">
+                        {placeholder}
+                    </div>
+                )}
+            </div>
 
             {!isReady && (
                 <div className="border-t p-3 text-sm text-muted-foreground">{placeholder}</div>
             )}
+
+            {uploadError && <div className="border-t p-3 text-sm text-destructive">{uploadError}</div>}
         </div>
     )
 }

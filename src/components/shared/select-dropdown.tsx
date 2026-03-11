@@ -1,0 +1,74 @@
+"use client"
+
+import { useProgress } from "@bprogress/next";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useTransition } from "react";
+import { Field, FieldLabel } from "../ui/field";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+
+type SelectDropdownProps = {
+  label: string
+  query: {
+    name: string,
+    values: {
+      label: string,
+      value: string
+    }[],
+    defaultValue?: string
+    deleteValue?: string
+  }
+}
+
+export default function SelectDropdown({
+  label,
+  query
+}: SelectDropdownProps) {
+  const router = useRouter();
+  const params = new URLSearchParams(useSearchParams().toString());
+  const [isPending, startTransition] = useTransition();
+
+  const progress = useProgress()
+
+  useEffect(() => {
+    if (isPending) {
+      progress.start();
+    } else {
+      progress.stop();
+    }
+  }, [isPending])
+
+
+  function onChange(value: string) {
+    startTransition(() => {
+      params.set(query.name, value)
+
+      if (query.defaultValue === value) {
+        params.delete(query.name)
+      }
+
+      router.push(`?${params}`)
+    })
+  }
+
+  return (
+    <>
+      <Field className="w-fit">
+        <FieldLabel>{label}</FieldLabel>
+        <Select defaultValue={params.get(query.name) ?? query.defaultValue} onValueChange={onChange}>
+          <SelectTrigger>
+            <SelectValue placeholder={`Pilih ${label}`} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {
+                query.values.map((value) => (
+                  <SelectItem key={value.value} value={value.value}>{value.label}</SelectItem>
+                ))
+              }
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </Field>
+    </>
+  )
+}

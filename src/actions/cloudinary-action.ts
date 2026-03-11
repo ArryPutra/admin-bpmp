@@ -3,7 +3,8 @@
 import cloudinary from "@/lib/cloudinary";
 
 export async function uploadImageAction(
-    file: File | null
+    file: File | null,
+    folder = "bpmp-berita"
 ) {
 
     if (!file || file.size === 0) {
@@ -27,7 +28,7 @@ export async function uploadImageAction(
             (resolve, reject) => {
                 const stream = cloudinary.uploader.upload_stream(
                     {
-                        folder: "bpmp-berita",
+                        folder,
                         resource_type: "image",
                         transformation: [{ quality: "auto" }, { fetch_format: "auto" }],
                     },

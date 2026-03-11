@@ -1,6 +1,8 @@
 import { auth } from "@/lib/auth"
 import prisma from "@/lib/prisma"
 import { seedDataStatistik } from "./seeds/data-statistik"
+import { seedDataKonten } from "./seeds/data-konten"
+import beritaSeed from "./seeds/berita-seed"
 
 async function main() {
     await auth.api.signUpEmail({
@@ -12,6 +14,8 @@ async function main() {
     })
 
     await seedDataStatistik()
+    await seedDataKonten()
+    await beritaSeed()
 }
 
 main()

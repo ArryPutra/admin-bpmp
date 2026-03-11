@@ -11,7 +11,8 @@ export const CreateBeritaSchema = z.object({
         .refine(
             file => ["image/jpeg", "image/png", "image/webp"].includes(file.type),
             "Format gambar harus JPEG, PNG, atau WebP"
-        )
+        ),
+    kategoriId: z.coerce.number().int().positive("Pilih kategori yang valid").optional(),
 })
 
 export const UpdateBeritaSchema = z.object({
@@ -31,5 +32,6 @@ export const UpdateBeritaSchema = z.object({
                 "Format gambar harus JPEG, PNG, atau WebP"
             )
             .optional()
-    )
+    ),
+    kategoriId: z.coerce.number().int().positive("Pilih kategori yang valid").optional(),
 })

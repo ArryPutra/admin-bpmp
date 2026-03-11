@@ -56,7 +56,9 @@ export const ModelName = {
   Account: 'Account',
   Verification: 'Verification',
   DataStatistik: 'DataStatistik',
-  Berita: 'Berita'
+  KategoriBerita: 'KategoriBerita',
+  Berita: 'Berita',
+  DataKonten: 'DataKonten'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -135,6 +137,7 @@ export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[k
 
 export const DataStatistikScalarFieldEnum = {
   id: 'id',
+  group: 'group',
   key: 'key',
   label: 'label',
   value: 'value',
@@ -145,6 +148,16 @@ export const DataStatistikScalarFieldEnum = {
 export type DataStatistikScalarFieldEnum = (typeof DataStatistikScalarFieldEnum)[keyof typeof DataStatistikScalarFieldEnum]
 
 
+export const KategoriBeritaScalarFieldEnum = {
+  id: 'id',
+  nama: 'nama',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type KategoriBeritaScalarFieldEnum = (typeof KategoriBeritaScalarFieldEnum)[keyof typeof KategoriBeritaScalarFieldEnum]
+
+
 export const BeritaScalarFieldEnum = {
   id: 'id',
   slug: 'slug',
@@ -152,11 +165,25 @@ export const BeritaScalarFieldEnum = {
   isi: 'isi',
   gambar: 'gambar',
   gambarPublicId: 'gambarPublicId',
+  kategoriId: 'kategoriId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type BeritaScalarFieldEnum = (typeof BeritaScalarFieldEnum)[keyof typeof BeritaScalarFieldEnum]
+
+
+export const DataKontenScalarFieldEnum = {
+  id: 'id',
+  group: 'group',
+  label: 'label',
+  key: 'key',
+  value: 'value',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DataKontenScalarFieldEnum = (typeof DataKontenScalarFieldEnum)[keyof typeof DataKontenScalarFieldEnum]
 
 
 export const SortOrder = {

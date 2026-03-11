@@ -6,7 +6,13 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Separator } from '@/components/ui/separator'
 import { useActionState } from 'react'
 import FormBerita from '../components/form-berita'
-export default function BeritaCreate_View() {
+
+export default function BeritaCreate_View({
+    daftarKategori
+}: {
+    daftarKategori: { id: number; nama: string }[]
+}) {
+
     const [state, formAction, pending] =
         useActionState(createBeritaAction, null)
 
@@ -23,6 +29,7 @@ export default function BeritaCreate_View() {
                         formAction,
                         pending
                     }}
+                    daftarKategori={daftarKategori}
                 />
             </CardContent>
             <Separator />
